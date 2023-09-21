@@ -1,0 +1,100 @@
+package stepdefinationfile;
+
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
+import pageobjects.AmazonHomePage;
+import pageobjects.SearchPage;
+import pageobjects.SpiceJetHomePage;
+import resuable.BaseCode;
+import resuable.ReadExcel;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+public class AmazonSteps extends BaseCode {
+
+    @Given("user navigates to amazon")
+    public void naviagteUrl() throws IOException {
+
+        BaseCode.launchBrowser();
+   }
+
+    @Given("user enter the {string} and click search icon")
+    public void userEnterTheAndClickSearchIcon(String product) throws IOException {
+
+        AmazonHomePage.enterProductName(ReadExcel.getDataFromExcel("Product",0,0));
+        AmazonHomePage.clickSearchIcon();
+    }
+
+    @Then("Validate the title of page")
+    public void validateTheTitleOfPage() {
+
+        if(SearchPage.getTitleOfPage().equals("Amazon.in : iphone")){
+            System.out.println("match");
+        }else{
+            System.out.println("not match");
+        }
+    }
+
+    @Given("user extracts the value from the categrogy dropdown")
+    public void userExtractsTheValueFromTheCategrogyDropdown() {
+
+      //0 < 43
+        for (int i = 0 ; i < AmazonHomePage.getCategoryDropdownCount() ;i++ ){
+         String va = AmazonHomePage.getDropdownvalues(i);
+            System.out.println(va);
+        }
+
+    }
+
+    @Given("user selects the value from the category dropdown")
+    public void userSelectsTheValueFromTheCategoryDropdown() {
+
+        AmazonHomePage.selectCategoryByVisibleText("");
+    }
+
+    @Given("user clicks the babywishlist")
+    public void userClicksTheBabywishlist() {
+
+        Actions a = new Actions(driver);
+        WebElement signInElement =driver.findElement(By.id("nav-link-accountList-nav-line-1"));
+        a.clickAndHold(signInElement).build().perform();
+      //  driver.findElement(By.linkText("Baby Wishlist")).click();
+
+        driver.findElement(By.partialLinkText("by Wish")).sendKeys(Keys.chord(Keys.CONTROL,Keys.ENTER));
+
+        driver.findElement(By.name("q")).sendKeys("madurai" + Keys.ENTER);
+
+    }
+
+    @Given("user selects the value in from dropdown")
+    public void userSelectsTheValueInFromDropdown() {
+
+        SpiceJetHomePage.clickFromDropdown();
+        SpiceJetHomePage.selectValueInFromDropdown(1,2);
+
+    }
+
+    @Given("user drag and drop the box")
+    public void userDragAndDropTheBox() {
+
+        WebElement frameElement = driver.findElement(By.className("demo-frame"));
+        driver.switchTo().frame(frameElement);
+        Actions action = new Actions(driver);
+
+       WebElement source = driver.findElement(By.id("draggable"));
+       WebElement target = driver.findElement(By.id("droppable"));
+
+        action.dragAndDrop(source,target).build().perform();
+
+         driver.switchTo().defaultContent();
+    }
+}
