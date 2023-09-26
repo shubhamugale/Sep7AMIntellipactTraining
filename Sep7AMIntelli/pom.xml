@@ -32,7 +32,7 @@
                 <version>2.19.1</version>
                 <configuration>
                     <includes>
-                        <exclude>**/ParallelRunner.java</exclude>
+                        <exclude>**/*Runner.java</exclude>
                     </includes>
                 </configuration>
             </plugin>
