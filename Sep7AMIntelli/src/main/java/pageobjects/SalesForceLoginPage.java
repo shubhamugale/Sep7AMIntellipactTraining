@@ -9,7 +9,11 @@ public class SalesForceLoginPage extends BaseCode {
 
        // driver.findElement(By.id("username")).sendKeys(username);
 
-        driver.findElement(By.xpath("//div[@id='username_container']/child::input[1]")).sendKeys(username);
+      //  driver.findElement(By.xpath("//div[@id='username_container']/child::input[1]")).sendKeys(username);
+
+      //  driver.findElement(By.cssSelector("input[id='username']")).sendKeys(username);
+
+        driver.findElement(By.cssSelector("#username")).sendKeys(username);
     }
 
     public static void clickLoginButton(){
@@ -28,6 +32,11 @@ public class SalesForceLoginPage extends BaseCode {
        return driver.findElement(By.id("error")).getText();
 
     }
+
+    public static String getValueFromTable(String text){
+        return   driver.findElement(By.xpath("//td[normalize-space(text())='"+text+"']/following-sibling::td")).getText();
+    }
+
 
 
 

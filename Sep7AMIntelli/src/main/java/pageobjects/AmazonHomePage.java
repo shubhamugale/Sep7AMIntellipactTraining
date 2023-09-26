@@ -47,6 +47,22 @@ public class AmazonHomePage extends BaseCode {
 
         selectCategory = new Select(categoryElement);
 
+        driver.findElement(By.xpath("//label[text()='Username']"));
+
+    }
+
+    public static String getValueFromTable(int columnIndex){
+
+       return driver.findElement(By.xpath("//table[@class='wikitable']//tr//td["+columnIndex+"]")).getText();
+    }
+
+    public static String getValueFromTable(int rowIndex, int couInd){
+
+       return driver.findElement(By.xpath("//table[@class='wikitable']//tr["+rowIndex+"]//td["+couInd+"]")).getText();
+    }
+
+    public static String getValueFromTable(String text){
+      return   driver.findElement(By.xpath("//td[normalize-space(text())='"+text+"']/following-sibling::td")).getText();
     }
 
 

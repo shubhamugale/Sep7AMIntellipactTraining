@@ -5,9 +5,21 @@ public class ArrayExample {
     public static void main(String[] args) {
 
        int [] a = {56,90,32,80}; // 0 1 2 3
+
+        for(int k:a){
+            System.out.println(k);
+        }
+
+
        String [] k = {"aravinth","learnmore"}; // 0 ,1
 
+        for(String o:k){
+            System.out.println(o);
+        }
+
         System.out.println(a[4]);
+
+
 
         for (int i =0 ; i < k.length; i++){
 

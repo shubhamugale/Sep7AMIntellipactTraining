@@ -5,6 +5,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import pageobjects.SalesForceLoginPage;
@@ -39,12 +40,16 @@ public class LoginSalesForceSteps {
     @Then("user validate the error message")
     public void validateError() {
 
+
+ //   Assert.assertEquals("check your username and password. If you still can't log in, contact your Salesforce administrator.",SalesForceLoginPage.getErrorMessage());
+
+
     if(SalesForceLoginPage.getErrorMessage().equals("Please check your username and password. If you still can't log in, contact your Salesforce administrator.")){
 
-        System.out.println("both are equal");
+       Assert.assertTrue(true);
     }
     else{
-        System.out.println("not equal");
+        Assert.assertTrue(false);
     }
 
     }

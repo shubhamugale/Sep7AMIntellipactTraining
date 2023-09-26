@@ -18,6 +18,8 @@ import resuable.ReadExcel;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AmazonSteps extends BaseCode {
 
@@ -47,10 +49,15 @@ public class AmazonSteps extends BaseCode {
     @Given("user extracts the value from the categrogy dropdown")
     public void userExtractsTheValueFromTheCategrogyDropdown() {
 
+        List<String> dropval = new ArrayList<>();
       //0 < 43
         for (int i = 0 ; i < AmazonHomePage.getCategoryDropdownCount() ;i++ ){
          String va = AmazonHomePage.getDropdownvalues(i);
-            System.out.println(va);
+           dropval.add(va);
+        }
+
+        for(String d :dropval){
+            System.out.println(d);
         }
 
     }
@@ -96,5 +103,32 @@ public class AmazonSteps extends BaseCode {
         action.dragAndDrop(source,target).build().perform();
 
          driver.switchTo().defaultContent();
+    }
+
+    @Given("User handles the table")
+    public void userHandlesTheTable() {
+
+        WebElement ey = driver.findElement(By.xpath("//table[@class='infobox vcard']"));
+
+      //  ey.findElements(By.tagName("th")).size();
+      List<WebElement> colOneElements =  ey.findElements(By.tagName("th"));
+       List<String> colOnevalues = new ArrayList<String>();
+      for(WebElement k:colOneElements){
+          colOnevalues.add(k.getText());
+      }
+        System.out.println(colOnevalues);
+
+      List<String> colTwovale = new ArrayList<String>();
+        for (int i = 1 ; i <ey.findElements(By.tagName("td")).size();i++){
+            colTwovale.add(ey.findElements(By.tagName("td")).get(i).getText());
+        }
+        System.out.println(colTwovale);
+
+        WebElement v = driver.findElement(By.xpath("//table[@class='wikitable']"));
+       List <WebElement> g= v.findElements(By.xpath("//tr//td[3]"));
+       for (WebElement b:g){
+           System.out.println(b.getText());
+       }
+
     }
 }

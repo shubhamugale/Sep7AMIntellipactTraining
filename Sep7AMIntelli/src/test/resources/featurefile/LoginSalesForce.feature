@@ -1,4 +1,4 @@
-Feature: To validate the login functionality
+Feature: Salesforce login validation
 
   @SC01 @errormessage @Salesforce @RegessionTest
     #Before
