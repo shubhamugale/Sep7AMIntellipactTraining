@@ -21,6 +21,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class AmazonSteps extends BaseCode {
 
@@ -81,7 +82,16 @@ public class AmazonSteps extends BaseCode {
 
         driver.findElement(By.partialLinkText("by Wish")).sendKeys(Keys.chord(Keys.CONTROL,Keys.ENTER));
 
-        driver.findElement(By.name("q")).sendKeys("madurai" + Keys.ENTER);
+        Set<String> winPro =driver.getWindowHandles();
+        for(String wi:winPro){
+            driver.switchTo().window(wi);
+            System.out.println(driver.getTitle());
+            if(driver.getTitle().equals("baby")){
+              break;
+            }
+        }
+        driver.switchTo().defaultContent();
+
 
     }
 
