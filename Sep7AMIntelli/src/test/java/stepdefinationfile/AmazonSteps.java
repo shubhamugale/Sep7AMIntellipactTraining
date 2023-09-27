@@ -19,9 +19,7 @@ import resuable.ReadExcel;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class AmazonSteps extends BaseCode {
 
@@ -136,6 +134,11 @@ public class AmazonSteps extends BaseCode {
             colTwovale.add(ey.findElements(By.tagName("td")).get(i).getText());
         }
         System.out.println(colTwovale);
+
+        Map<List,List> m = new HashMap<List,List>();
+        m.put(colOnevalues,colTwovale);
+
+        Assert.assertEquals("EY",m.get("Trade Name"));
 
         WebElement v = driver.findElement(By.xpath("//table[@class='wikitable']"));
        List <WebElement> g= v.findElements(By.xpath("//tr//td[3]"));
