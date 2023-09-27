@@ -3,6 +3,7 @@ package stepdefinationfile;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -39,11 +40,13 @@ public class AmazonSteps extends BaseCode {
     @Then("Validate the title of page")
     public void validateTheTitleOfPage() {
 
-        if(SearchPage.getTitleOfPage().equals("Amazon.in : iphone")){
-            System.out.println("match");
-        }else{
-            System.out.println("not match");
-        }
+        Assert.assertEquals("Amazon.in : iphone",SearchPage.getTitleOfPage());
+
+//        if(SearchPage.getTitleOfPage().equals("Amazon.in : iphone")){
+//            System.out.println("match");
+//        }else{
+//            System.out.println("not match");
+//        }
     }
 
     @Given("user extracts the value from the categrogy dropdown")
