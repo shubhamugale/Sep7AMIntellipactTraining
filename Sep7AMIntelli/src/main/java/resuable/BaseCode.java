@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Properties;
 
 public class BaseCode {
@@ -38,6 +39,7 @@ public class BaseCode {
           //local variable
         driver.navigate().to(prob.getProperty("testenvi"));
         driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
     }
 
